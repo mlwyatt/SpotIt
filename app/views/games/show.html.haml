@@ -1,0 +1,5 @@
+- @game.cards.each do |card|
+  %div{style: 'border: 1px solid black; width: 100px; height: 100px;'}
+    - card.items.each do |item|
+      = item.word
+      %br

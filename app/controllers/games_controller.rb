@@ -20,7 +20,18 @@ class GamesController < ApplicationController
 
   def create
     if @game = @user.games.create(game_params)
-
+      n = params[:pictures_per_card].to_i
+      working = []
+      @game.items.to_a.combination(n) do |i|
+        if working.size == 0 || working.all?{|w| (w&i).size == 1}
+          working << i
+        end
+      end
+      working.each do |w|
+        card = @game.cards.create!
+        card.items << w
+      end
+      redirect_to user_game_path(@user,@game)
     end
   end
 
@@ -34,7 +45,7 @@ class GamesController < ApplicationController
     params.require(:game).permit(
       :id,
       items_attributes: [
-        :id
+        :id, :word
       ]
     )
   end

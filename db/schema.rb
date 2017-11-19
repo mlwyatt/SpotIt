@@ -13,13 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20171115001943) do
 
-  create_table "card_items", force: :cascade do |t|
-    t.integer  "card_id"
-    t.integer  "item_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "cards", force: :cascade do |t|
     t.integer  "game_id"
     t.datetime "created_at", null: false
@@ -27,6 +20,13 @@ ActiveRecord::Schema.define(version: 20171115001943) do
   end
 
   add_index "cards", ["game_id"], name: "index_cards_on_game_id"
+
+  create_table "cards_items", force: :cascade do |t|
+    t.integer  "card_id"
+    t.integer  "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "games", force: :cascade do |t|
     t.integer  "user_id"

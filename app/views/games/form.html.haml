@@ -7,7 +7,8 @@
         = select_tag :pictures_per_card, options_for_select((2..8).map{|i| [i,i,data: {numbers: (0...(i-1)*(i-1)+(i-1)+1).to_a, num_words: i*i+i+1}]}), class: 'js--number-of-words'
       - @game.items.each_with_index do |item,i|
         = f.fields_for :items, item do |fi|
-          = fi.hidden_field :id, value: fi.object.id
           .col.s2{class: "js--word-#{i} js--word"}
+            = fi.hidden_field :id, value: fi.object.id
             = fi.label :word
             = fi.text_field :word, value: fi.object.word
+    = f.submit
